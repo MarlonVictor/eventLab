@@ -1,5 +1,6 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
+import { Video } from "../components/Video";
 
 export function Event() {
     return (
@@ -7,9 +8,7 @@ export function Event() {
             <Header />
 
             <main className="flex flex-1 min-h-screen">
-                <div className="flex-1">
-                    <h1>Hello Word</h1>
-                </div>
+                <Video />
 
                 <Sidebar />
             </main>

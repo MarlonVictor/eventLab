@@ -25,7 +25,7 @@ export function Lesson(props: LessonProps) {
             <div className="rounded border border-gray-500 p-4 mt-2">
                 <header className="flex items-center justify-between">
                     {isLessonAvailable ? (
-                        <span className="text-sm text-blue-500 font-medium flex items-center gap-2">
+                        <span className="text-sm text-purple-300 font-medium flex items-center gap-2">
                             <CheckCircle size={20} />
                             Conteúdo liberado
                         </span>
@@ -36,7 +36,7 @@ export function Lesson(props: LessonProps) {
                         </span>
                     )}
                     
-                    <span className="text-xs rounded px-2 py-[0.125rem] text-white border border-green-500 font-bold">
+                    <span className="text-xs rounded px-2 py-[0.125rem] text-white border border-blue-500 font-bold">
                         {props.type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
                     </span>
                 </header>

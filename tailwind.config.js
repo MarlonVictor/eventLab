@@ -13,6 +13,7 @@ module.exports = {
           300: '#00B37E',
         },
         purple: {
+          300: '#9fa5e0',
           500: '#6C72CB',
         },
         pink: {
