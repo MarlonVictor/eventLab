@@ -81,7 +81,7 @@ export function Video(props: VideoProps) {
                             />
 
                             <div className="leading-relaxed">
-                                <strong className="font-bold text-2xl block">M{data.lesson.teacher.name}r</strong>
+                                <strong className="font-bold text-2xl block">{data.lesson.teacher.name}</strong>
                                 <span className="text-gray-200 text-sm block">{data.lesson.teacher.bio}</span>
                             </div>
                         </div>
