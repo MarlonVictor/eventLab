@@ -4,8 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/MarlonVictor/eventLab?color=61DAFB&logo=GitHub&style=flat-square">
-  <img src="https://img.shields.io/github/stars/MarlonVictor/eventLab?color=61DAFB&logo=github&style=flat-square">
-  <img src="https://img.shields.io/github/license/MarlonVictor/eventLab?color=61DAFB&style=flat-square">
+  <img src="https://img.shields.io/github/stars/MarlonVictor/eventLab?color=61DAFB&logo=Github&style=flat-square">
+  <img src="https://img.shields.io/github/license/MarlonVictor/eventLab?color=61DAFB&logo=License&style=flat-square">
 </p>
 
 ## Sobre
