@@ -41,6 +41,28 @@ module.exports = {
           900: '#17181F'
         }
       },
+      screens: {
+        'min2xl': { 'min': '1441px' },
+        // => @media (max-width: 1535px) { ... }
+  
+        '2xl': { 'max': '1441px' },
+        // => @media (max-width: 1535px) { ... }
+  
+        'xl': { 'max': '1367px' },
+        // => @media (max-width: 1279px) { ... }
+  
+        'lg': { 'max': '1281px' },
+        // => @media (max-width: 1023px) { ... }
+  
+        'md2': { 'max': '1180px' },
+        // => @media (max-width: 767px) { ... }
+  
+        'md': { 'max': '767px' },
+        // => @media (max-width: 767px) { ... }
+  
+        'sm': { 'max': '639px' },
+        // => @media (max-width: 639px) { ... }
+      },
     },
   },
   plugins: [],
