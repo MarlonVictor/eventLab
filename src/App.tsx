@@ -1,15 +1,18 @@
 import { ApolloProvider } from '@apollo/client'
 import { BrowserRouter } from "react-router-dom"
 
+import { NotifyProvider } from './components/Notify'
 import { client } from './lib/apollo'
 import { Router } from "./Router"
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <NotifyProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </NotifyProvider>
     </ApolloProvider>
   )
 }

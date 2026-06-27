@@ -1,79 +1,95 @@
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { useCreateSubscriberMutation } from "../graphql/generated";
-import { Logo } from "../components/Logo";
+import { useCreateSubscriberMutation } from "../graphql/generated"
+import { Logo } from "../components/Logo"
+import { useNotify } from "../components/Notify"
+import { AnimatedBackground } from "../components/ui/AnimatedBackground"
+import { SplashScreen } from "../components/subscribe/SplashScreen"
+import { SubscribeForm } from "../components/subscribe/SubscribeForm"
+import { getMutationErrorMessage, formatGraphQLError } from "../lib/graphql-errors"
+import { saveSubscriber } from "../lib/subscriber"
 
-import imgUrl from '../../src/assets/mockup.png'
-
+import mockupImg from '../assets/mockup.png'
 
 export function Subscribe() {
     const navigate = useNavigate()
+    const notify = useNotify()
     const [createSubscriber, { loading }] = useCreateSubscriberMutation()
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const [showSplash, setShowSplash] = useState(true)
+    const [showContent, setShowContent] = useState(false)
 
+    const handleSplashComplete = useCallback(() => {
+        setShowSplash(false)
+        setShowContent(true)
+    }, [])
 
-    async function handleSubscribe(e: FormEvent) {
-        e.preventDefault()
+    async function handleSubscribe({ name, email }: { name: string; email: string }) {
+        try {
+            const result = await createSubscriber({
+                variables: { name, email }
+            })
 
-        await createSubscriber({
-            variables: {
-                name,
-                email
+            if (result.errors?.length) {
+                notify(
+                    result.errors.map(error => formatGraphQLError(error.message)).join(' '),
+                    'error'
+                )
+                return
             }
-        })
 
-        navigate('/event')
+            saveSubscriber({ name, email })
+            navigate('/event')
+        } catch (error) {
+            notify(getMutationErrorMessage(error), 'error')
+        }
     }
 
     return (
-        <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
-            <div className="w-full max-w-[1100px] flex items-center justify-between mt-28 mx-auto md2:flex-col md2:gap-16 md:px-8 sm:my-8">
-                <div className="max-w-[640px]">
-                    <Logo />
+        <div className="relative h-screen overflow-hidden">
+            <AnimatedBackground />
 
-                    <h1 className="mt-8 text-[2.5rem] leading-tight">
-                        Construa uma <strong className="text-blue-500">aplicação completa</strong>, do zero, com 
-                        <strong className="text-blue-500"> React JS</strong>
-                    </h1>
+            {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
 
-                    <p className="mt-4 text-gray-200 leading-relaxed">
-                        Em apenas uma semana você vai dominar na prática uma das tecnologias mais utilizadas e 
-                        com alta demanda para acessar as melhores oportunidades do mercado.
-                    </p>
-                </div>
+            {showContent && (
+                <>
+                    <div className="relative h-full flex flex-col overflow-hidden px-8 pt-24 md:px-4 md2:px-6 md2:pt-16 md2:justify-center sm:pt-12 sm:px-4">
+                        <div className="w-full max-w-[1300px] mx-auto flex items-start justify-between md2:flex-col md2:items-center md2:gap-6 shrink-0">
+                            <div className="max-w-[640px] md2:text-center md2:w-full">
+                                <div className="fade-in-up delay-100 md2:flex md2:justify-center">
+                                    <Logo />
+                                </div>
 
-                <div className="p-8 bg-gray-700 border border-gray-500 rounded min-w-[400px] max-w-[640px] md2:w-full sm:min-w-0">
-                    <strong className="text-2xl mb-6 block">Inscreva-se gratuitamente</strong>
+                                <h1 className="mt-8 text-[2.5rem] leading-tight fade-in-up delay-200 sm:text-3xl md2:mt-6">
+                                    Build a <strong className="text-blue-500">complete application</strong>, from scratch, with
+                                    <strong className="text-blue-500"> React JS</strong>
+                                </h1>
 
-                    <form onSubmit={handleSubscribe} className="flex flex-col gap-2 w-full">
-                        <input 
-                            type="text" 
-                            placeholder="Seu nome completo" 
-                            className="bg-gray-900 rounded px-5 h-14"
-                            onChange={e => setName(e.target.value)}
-                        />
-                        <input 
-                            type="text" 
-                            placeholder="Digite seu e-mail" 
-                            className="bg-gray-900 rounded px-5 h-14"
-                            onChange={e => setEmail(e.target.value)}
-                        />
+                                <p className="mt-4 text-gray-200 leading-relaxed fade-in-up delay-300 sm:text-sm">
+                                    In just one week you will master in practice one of the most used and high-demand technologies
+                                    to access the best opportunities in the market.
+                                </p>
+                            </div>
 
-                        <button 
-                            type="submit"
-                            disabled={loading}
-                            className="mt-4 bg-purple-500 py-4 rounded font-bold text-sm transition-colors disabled:opacity-70"
-                        >
-                            { loading ? 'Carregando' : 'Garantir minha vaga'}
-                        </button>
-                    </form>
-                </div>
-            </div>
+                            <SubscribeForm loading={loading} onSubmit={handleSubscribe} />
+                        </div>
 
-            <img src={imgUrl} className="mt-10 md2:absolute md2:-z-10 md2:top-1/2 md2:-translate-y-1/2" alt="Mockup" />
+                        <div className="flex-1 flex items-end justify-center min-h-0 w-full mt-2 md2:hidden">
+                            <img
+                                src={mockupImg}
+                                alt=""
+                                aria-hidden
+                                className="mx-auto w-full max-w-[1400px] h-full object-contain object-bottom pointer-events-none fade-in-up delay-300"
+                            />
+                        </div>
+
+                        <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-sm text-gray-100/90 px-4 fade-in-up delay-700 sm:text-xs sm:bottom-3">
+                            Illustrative project for study purposes. Subscription data may be fictitious.
+                        </p>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

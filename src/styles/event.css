@@ -1,0 +1,129 @@
+.event-surface {
+    background-color: #17181F;
+}
+
+.glass-card-interactive {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.glass-card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 24px rgba(108, 114, 203, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.event-hover-lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.event-hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+.event-hover-glow-blue:hover {
+    border-color: rgba(97, 218, 251, 0.45);
+    box-shadow: 0 8px 32px rgba(97, 218, 251, 0.12);
+}
+
+.event-hover-glow-purple:hover {
+    box-shadow: 0 8px 32px rgba(108, 114, 203, 0.2);
+}
+
+.event-btn {
+    transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(108, 114, 203, 0.25);
+}
+
+.event-btn:active {
+    transform: translateY(0);
+}
+
+.event-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.event-icon-pulse {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.group:hover .event-icon-pulse {
+    transform: scale(1.08);
+    box-shadow: 0 0 28px rgba(97, 218, 251, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .glass-card-interactive:hover,
+    .event-hover-lift:hover,
+    .event-btn:hover,
+    .group:hover .event-icon-pulse {
+        transform: none;
+    }
+}
+
+.event-scroll-panel {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.event-scroll-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.event-scroll-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.event-scroll-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+}
+
+.event-scroll-panel::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.32);
+}
+
+.event-sidebar-panel {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.event-sidebar-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.event-sidebar-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.event-sidebar-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+}
+
+.event-sidebar-panel::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.32);
+}
+
+.video-player-shell {
+    width: 100%;
+    max-width: min(100%, calc((100vh - 16rem) * 16 / 9 * 0.85));
+    margin: 0 auto;
+    background: #000;
+}
+
+.video-player-shell vm-player {
+    display: block;
+    width: 100%;
+}

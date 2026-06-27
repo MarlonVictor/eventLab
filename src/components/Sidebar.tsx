@@ -6,9 +6,9 @@ export function Sidebar() {
     const { data } = useGetLessonsQuery()
 
     return (
-        <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
-            <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
-                Cronograma de aulas
+        <aside className="event-sidebar-panel w-[348px] shrink-0 backdrop-blur-xl bg-gray-700/30 p-6 border-l border-white/10">
+            <span className="font-bold text-2xl pb-6 mb-6 border-b border-white/10 block">
+                Lesson schedule
             </span>
 
             <div className="flex flex-col gap-8">
@@ -21,13 +21,6 @@ export function Sidebar() {
                         type={lesson.lessonType}
                     /> 
                 ))}
-
-                {/* <Lesson 
-                    title='Abertura do evento Ignite labs'
-                    slug='String'
-                    availableAt='Domingo • 20 de junho • 19h00'
-                    type='live'
-                /> */}
             </div>
         </aside>
     )
